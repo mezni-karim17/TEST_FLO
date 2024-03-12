@@ -48,7 +48,6 @@ database-init: ## Init database
 	$(MAKE) database-drop
 	$(MAKE) database-create
 	$(MAKE) database-migrate
-	$(MAKE) fixtures
 
 database-drop: ## Drop database
 	$(SYMFONY_CONSOLE) d:d:d --force --if-exists
@@ -68,8 +67,4 @@ database-migrate: ## Migrate migrations
 migrate: ## Alias : database-migrate
 	$(MAKE) database-migrate
 
-database-fixtures-load: ## Load fixtures
-	$(SYMFONY_CONSOLE) d:f:l --no-interaction
 
-fixtures: ## Alias : database-fixtures-load
-	$(MAKE) database-fixtures-load
