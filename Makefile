@@ -43,11 +43,17 @@ composer-update: ## Update dependencies
 	$(COMPOSER) update
 
 
+jwt-keypair: ## generate public et private key
+	$(SYMFONY_CONSOLE) lexik:jwt:generate-keypair
+
 ## —— 📊 Database ——
 database-init: ## Init database
 	$(MAKE) database-drop
 	$(MAKE) database-create
-	$(MAKE) database-migrate
+	$(MAKE) database-schema
+
+database-schema:
+	$(SYMFONY_CONSOLE) doctrine:schema:update --force
 
 database-drop: ## Drop database
 	$(SYMFONY_CONSOLE) d:d:d --force --if-exists
