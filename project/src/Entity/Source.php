@@ -3,30 +3,47 @@
 namespace App\Entity;
 
 use App\Repository\SourceRepository;
+use App\State\SourceProcessor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\Post;
 
 #[ORM\Entity(repositoryClass: SourceRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [
+        new Get(normalizationContext: ['groups' => 'source:item']),
+        new GetCollection(normalizationContext: ['groups' => 'source:list'])
+    ],
+)]
+
+
+#[Post(processor: SourceProcessor::class, denormalizationContext: ['groups' => 'source:post'])]
 class Source
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['source:list', 'source:item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['source:list', 'source:item', 'source:post'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'source')]
     private Collection $articles;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['source:list', 'source:item', 'source:post'])]
     private ?string $src = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['source:list', 'source:item', 'source:post'])]
     private ?string $type = null;
 
     const RSS = 'RSS';
