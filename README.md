@@ -11,8 +11,9 @@ Installation
 ------------
 
 - Aprés de cloner le projet lancer les commandes :
-1- make init
-2- make database-init
+    - 1 make init
+    - 2 make database-init
+    - 3 make jwt-keypair
 
 API Swagger : http://127.0.0.1:8000/api
 DataBase : http://127.0.0.1:8080/
@@ -26,7 +27,7 @@ Description
 
     - La création d'un service AdapterAgregator appliquant le pattern Aggregator est utilisée pour agréger plusieurs objets en un seul objet agrégé. Dans ce cas, la classe AdapterAggregator agrège plusieurs objets qui implémentent l'interface DataAdapterInterface. Elle fournit une méthode getAdapter() pour récupérer un adaptateur spécifique en fonction du type de la source.
 
-    - La classe RssAdapter, qui implémente l'interface DataAdapterInterface, encapsule la logique métier permettant de récupérer les articles d'un flux RSS et de les persister dans la base de données.
+    - La classe RssAdapter, qui implémente l'interface DataAdapterInterface, encapsule la logique métier permettant de récupérer les articles d'un flux RSS et de les persister dans la base de données. On peut ajouter plusieur class de flux sans modifier le code source
 
     - Authentification avec JWT (JSON Web Token) et Refresh Token
 
