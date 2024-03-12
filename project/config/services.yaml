@@ -19,6 +19,10 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
+    App\State\HashPasswordProcessor:
+        bind:
+            $processorInterface: '@api_platform.doctrine.orm.state.persist_processor'
     App\Adapter\DataAdapterInterface: '@App\Adapter\RssAdapter'
     App\Services\AdapterAgregator:
         arguments:
