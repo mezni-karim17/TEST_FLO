@@ -10,8 +10,9 @@ Technologies Utilisées
 Installation
 ------------
 
-- Aprés de cloner le projet lancer la commande pour builder les images : make init
-- make database-create
+- Aprés de cloner le projet lancer les commandes :
+1- make init
+2- make database-init
 
 API Swagger : http://127.0.0.1:8000/api
 DataBase : http://127.0.0.1:8080/
