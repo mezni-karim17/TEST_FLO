@@ -19,6 +19,15 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+    App\Adapter\DataAdapterInterface: '@App\Adapter\RssAdapter'
+    App\Services\AdapterAgregator:
+        arguments:
+            $adapters:
+                - '@App\Adapter\RssAdapter'
+                - '@App\Adapter\DatabaseAdapter'
+                - '@App\Adapter\FileSystemAdapter'
+                - '@App\Adapter\RestApiAdapter'
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
